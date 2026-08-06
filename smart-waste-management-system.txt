@@ -1,0 +1,36 @@
+Overview
+The Smart Waste Management System is a web-based platform designed to simplify the process of reporting and managing waste-related issues in urban areas. The application enables citizens to report garbage by uploading images along with their location, allowing authorities to monitor and resolve complaints more efficiently. The project aims to promote cleaner cities through technology while improving communication between citizens and municipal authorities.
+
+The Problem
+Traditional waste reporting methods are often slow, lack transparency, and make it difficult for citizens to track the status of their complaints. Municipal authorities also face challenges in organizing reports and prioritizing waste collection effectively.
+
+The Solution
+The Smart Waste Management System provides a centralized platform where users can securely register, submit complaints with images and location details, and monitor the progress of their reports. Administrators can review complaints, update their status, assign tasks, and manage users through a dedicated dashboard, ensuring faster and more efficient waste management.
+
+Key Features
+Secure user authentication and authorization
+Image upload for waste reporting
+Location-based complaint submission
+Complaint status tracking
+Admin dashboard for complaint management
+User profile and complaint history
+Responsive design for desktop and mobile devices
+
+Technologies Used
+Frontend
+React.js
+HTML5
+CSS3
+JavaScript
+
+Backend
+Node.js
+Express.js
+
+Database
+MySQL
+Other Tools
+
+Git & GitHub
+REST APIs
+JWT Authentication

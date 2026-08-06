@@ -1,0 +1,23 @@
+Employee CRUD API
+
+Overview
+The Employee CRUD API is a RESTful backend application designed to manage employee records efficiently. It provides a secure and scalable system for performing Create, Read, Update, and Delete (CRUD) operations through well-structured API endpoints.
+
+Problem
+Managing employee information manually or with outdated systems can lead to data inconsistency, inefficient workflows, and limited accessibility. A centralized API simplifies employee data management and enables seamless integration with frontend applications.
+
+Solution
+I developed a RESTful API that allows users to add, retrieve, update, and delete employee records while ensuring proper data validation and structured communication between the client and the database. The API follows REST principles to provide reliable and maintainable backend services.
+
+Key Features
+Create, read, update, and delete employee records
+RESTful API architecture
+Data validation and error handling
+Database integration for persistent storage
+Clean and modular backend structure
+Technologies Used
+
+Backend: Node.js, Express.js
+Database: MySQL
+API Testing: Postman
+Version Control: Git, GitHub

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimal Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand">Sameer Qureshi</div>
+
+        <nav>
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon">☾</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero reveal" id="home">
+          <p class="eyebrow">Computer Enthusias</p>
+          <h1>Designing & Developing with digital experiences.</h1>
+          <p class="hero-copy">
+            I design and develop modern web applications with a focus on performance, scalability, and user experience.
+            Passionate about full-stack development, cloud technologies, and building solutions that create real value.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#projects">See projects</a>
+            <a class="button button-secondary" href="#contact">Get in touch</a>
+          </div>
+        </section>
+
+        <section class="section-grid reveal" id="about">
+          <div class="text-block">
+            <p class="section-label">About</p>
+            <h2>Who I am</h2>
+            <p>
+              I'm Sameer Qureshi, a Computer Engineering student passionate about building modern web applications and solving real-world problems through technology. I enjoy learning new tools, creating scalable software, and continuously improving my skills in full-stack development, backend engineering, cloud computing, and problem-solving.
+
+            </p>
+            <p>
+              I enjoy collaborating with product teams, refining details, and
+              turning ideas into simple, purposeful pages.
+            </p>
+          </div>
+          <div class="stats-card">
+            <div>
+              <span>2+</span>
+              <p>Years of experience</p>
+            </div>
+            <div>
+              <span>12</span>
+              <p>Featured projects</p>
+            </div>
+            <div>
+              <span>10+</span>
+              <p>Live projects deployed</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-grid section-alt reveal" id="work">
+          <div class="service-card">
+            <p class="section-label">Services</p>
+            <h2>What I do</h2>
+            <ul>
+              <li>Development</li>
+              <li>Algorithms</li>
+              <li>Artificial Intelligence</li>
+              <li>Security</li>
+            </ul>
+          </div>
+          <div class="service-card white-card">
+            <h3>Skills</h3>
+            <div class="skills-grid">
+              <span>C++</span>
+              <!-- <span>Java</span> -->
+              <span>Python</span>
+               <span>DSA</span>
+              <span>AI</span>
+              <!-- <span>JavaScript</span>
+              <span>TypeScript</span> -->
+              <span>React</span>
+              <!-- <span>Node.js</span>
+              <span>Express.js</span>
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>Tailwind CSS</span> -->
+              <span>MySQL</span>
+              <!-- <span>PostgreSQL</span> -->
+              <!-- <span>Git</span>
+              <span>GitHub</span> -->
+              <span>Postman</span>
+              <span>AWS</span>
+              <!-- <span>REST API</span> -->
+              <!-- <span>OpenCV</span> -->
+            </div>
+          </div>
+        </section>
+
+        <section class="projects reveal" id="projects">
+          <p class="section-label">Projects</p>
+          <h2>Selected work</h2>
+          <div class="project-list">
+            <article class="project-card">
+              <div>
+                <span></span>
+                <h3>Smart Waste Management System</h3>
+                <p>
+                 A smart web application that enables users to report garbage issues with images and location tracking.
+Features secure authentication, complaint management, and an admin dashboard for efficient waste monitoring.
+                </p>
+              </div>
+              <a href="smart-waste-management-system.txt" target="_blank">View case study</a>
+            </article>
+            <article class="project-card">
+              <div>
+                <h3>Employee CRUD API</h3>
+                <p>
+                  A full-stack CRUD application for managing employee records with a user-friendly interface.
+Supports creating, updating, deleting, and searching employee information using REST APIs.
+                </p>
+              </div>
+              <a href="employee-crud-api.txt" target="_blank">View case study</a>
+            </article>
+            <article class="project-card">
+              <div>
+                <h3>Microservices API</h3>
+                <p>
+                 A scalable backend architecture built using independent microservices for better maintainability.
+Demonstrates service communication, authentication, and modular API development.
+                </p>
+              </div>
+              <a href="microservices-api.txt" target="_blank">View case study</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="contact-panel reveal" id="contact">
+          <div>
+            <p class="section-label">Contact</p>
+            <h2>Let’s create something epic and meaningful.</h2>
+            <p>
+              I’m available for freelance work and new collaborations. Send a
+              note and I’ll reply within 1-2 business days.
+            </p>
+          </div>
+          <a class="button button-large" href="mailto:sameerdigitally@gmail.com">Email me</a>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>© 2026 Your Name. Designed with a minimal aesthetic.</p>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
