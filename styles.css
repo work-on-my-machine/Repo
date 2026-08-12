@@ -57,6 +57,56 @@ body {
   color: var(--text);
 }
 
+.cursor-follower {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(17, 17, 17, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.18);
+  opacity: 0.9;
+  z-index: 9999;
+  transition: transform 0.22s ease, opacity 0.22s ease, width 0.22s ease, height 0.22s ease, background-color 0.22s ease;
+  will-change: transform, opacity;
+}
+
+.cursor-follower.active {
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%) scale(1.05);
+  background: rgba(17, 17, 17, 0.72);
+}
+
+.cursor-trail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.cursor-trail-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.9;
+  animation: cursor-fall 0.9s ease forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes cursor-fall {
+  to {
+    transform: translateY(26px) scale(0.55);
+    opacity: 0;
+  }
+}
+
 .page-shell {
   max-width: 1080px;
   margin: 0 auto;
@@ -105,17 +155,17 @@ body {
 }
 
 .topbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.08);
-  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
   padding: 18px 24px 24px;
 }
 
 body.dark-theme .topbar.scrolled {
-  background-color: rgba(15, 19, 24, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(15, 19, 24, 0.2);
+  border: none;
 }
 
 .brand {
@@ -160,16 +210,136 @@ nav a {
   color: var(--muted);
   text-decoration: none;
   font-size: 0.95rem;
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+  padding: 8px 10px;
+  border-radius: 10px;
 }
 
 nav a:hover {
   color: var(--text);
 }
 
+/* Pop + background for nav items (e.g., "About") */
+nav a:hover,
+nav a:focus,
+nav a.pop {
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(17, 17, 17, 0.06);
+  color: var(--text);
+  box-shadow: 0 16px 40px rgba(17, 17, 17, 0.06);
+}
+
+body.dark-theme nav a:hover,
+body.dark-theme nav a.pop {
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .hero {
-  max-width: 680px;
+  max-width: 1000px;
   padding: 40px 0 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-content {
+  flex: 1 1 0;
+  max-width: 620px;
+}
+
+/* Overlay + pop styles for hero drag interaction */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  transition: background 0.28s ease, backdrop-filter 0.28s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero.blur-active .hero-overlay {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-visual {
+  flex: 0 0 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-photo {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  image-rendering: auto;
+  filter: blur(0.2px);
+  transform: translateZ(0);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 42px rgba(17,17,17,0.06);
+  display: block;
+  -webkit-mask-image: radial-gradient(ellipse 90% 90% at center, #000 85%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 90% at center, #000 85%, transparent 100%);
+}
+
+.hero-photo:hover,
+.hero-photo:focus-visible {
+  transform: translateY(-4px) translateZ(0) scale(1.02);
+  box-shadow: 0 24px 58px rgba(17,17,17,0.12);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-visual {
+    flex: none;
+    width: 100%;
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+  }
+}
+
+.button.pop {
+  transform: scale(1.06) !important;
+  box-shadow: 0 36px 90px rgba(0, 0, 0, 0.5) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.button.drag-active.pop {
+  background: #111111;
+  color: #fff;
+}
+
+/* Make the "Get in touch" hero secondary button text adapt to theme */
+.hero .button.button-secondary {
+  color: var(--text) !important;
+}
+
+/* Make the LinkedIn button text adapt to theme */
+.contact-actions .button.button-secondary {
+  color: var(--text) !important;
 }
 
 .eyebrow,
@@ -177,7 +347,7 @@ nav a:hover {
   font-size: 0.82rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #7a756f;
+  color: var(--muted-strong);
   margin-bottom: 16px;
 }
 
@@ -196,7 +366,7 @@ nav a:hover {
 .service-card p,
 .project-card p,
 .contact-panel p {
-  color: #4b4b4b;
+  color: var(--muted);
   max-width: 620px;
   margin-top: 24px;
 }
@@ -212,6 +382,7 @@ nav a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   padding: 14px 24px;
   border-radius: 999px;
   text-decoration: none;
@@ -221,9 +392,23 @@ nav a:hover {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
+.button-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+  display: block;
+}
+
 .button:hover {
   transform: translateY(-1px);
   box-shadow: var(--button-shadow);
+}
+
+.button.drag-active {
+  background: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
 }
 
 .button-secondary {
@@ -367,7 +552,7 @@ nav a.active {
 .footer {
   margin-top: 64px;
   text-align: center;
-  color: #7a756f;
+  color: var(--muted-strong);
   font-size: 0.95rem;
 }
 
