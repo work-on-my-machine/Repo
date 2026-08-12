@@ -447,6 +447,8 @@ nav a.active {
   grid-template-columns: 1.3fr 0.9fr;
   gap: 32px;
   margin-top: 64px;
+  position: relative;
+  z-index: 1;
 }
 
 .section-alt {
@@ -547,6 +549,8 @@ nav a.active {
   align-items: center;
   gap: 32px;
   margin-top: 64px;
+  position: relative;
+  z-index: 1;
 }
 
 .footer {
@@ -554,6 +558,8 @@ nav a.active {
   text-align: center;
   color: var(--muted-strong);
   font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 900px) {
