@@ -603,4 +603,9 @@ nav a.active {
   .button {
     width: 100%;
   }
+
+  .cursor-follower,
+  .cursor-trail {
+    display: none;
+  }
 }
