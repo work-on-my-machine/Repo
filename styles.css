@@ -529,9 +529,9 @@ nav a.active {
 
 .project-card {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
-  align-items: center;
+  align-items: start;
 }
 
 .project-card span {
@@ -546,14 +546,6 @@ nav a.active {
 .project-card h3 {
   margin: 0 0 12px;
   font-size: 1.6rem;
-}
-
-.project-card a {
-  display: inline-flex;
-  align-items: center;
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
 }
 
 .contact-panel {
@@ -794,10 +786,6 @@ nav a.active {
     align-items: stretch;
     margin-top: 0;
     padding: 24px;
-  }
-
-  .project-card a {
-    min-height: 44px;
   }
 
   .contact-panel {
