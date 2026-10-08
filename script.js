@@ -1,6 +1,12 @@
 const navLinks = document.querySelectorAll('nav a');
 const themeToggle = document.getElementById('themeToggle');
+const menuToggle = document.getElementById('menuToggle');
+const primaryNavigation = document.getElementById('primaryNavigation');
+const topbar = document.querySelector('.topbar');
 const body = document.body;
+const supportsCustomCursor =
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+  !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const cursorFollower = document.createElement('div');
 cursorFollower.className = 'cursor-follower';
@@ -38,6 +44,8 @@ function spawnTrailDot(x, y) {
 }
 
 window.addEventListener('pointermove', (event) => {
+  if (!supportsCustomCursor) return;
+
   targetX = event.clientX;
   targetY = event.clientY;
   cursorFollower.style.opacity = '0.95';
@@ -129,7 +137,7 @@ function animateCursor() {
   requestAnimationFrame(animateCursor);
 }
 
-animateCursor();
+if (supportsCustomCursor) animateCursor();
 
 function setTheme(theme) {
   const isDark = theme === 'dark';
@@ -150,12 +158,44 @@ navLinks.forEach((link) => {
   link.addEventListener('click', () => {
     navLinks.forEach((item) => item.classList.remove('active'));
     link.classList.add('active');
+    setMenuOpen(false);
   });
 });
 
+function setMenuOpen(isOpen) {
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  primaryNavigation.classList.toggle('is-open', isOpen);
+}
+
+menuToggle.addEventListener('click', () => {
+  setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+});
+
+document.addEventListener('click', (event) => {
+  if (
+    menuToggle.getAttribute('aria-expanded') === 'true' &&
+    !topbar.contains(event.target)
+  ) {
+    setMenuOpen(false);
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+    setMenuOpen(false);
+    menuToggle.focus();
+  }
+});
+
+window.matchMedia('(min-width: 769px)').addEventListener('change', (event) => {
+  if (event.matches && menuToggle.getAttribute('aria-expanded') === 'true') {
+    setMenuOpen(false);
+  }
+});
+
 window.addEventListener('scroll', () => {
-  const header = document.querySelector('.topbar');
-  header.classList.toggle('scrolled', window.scrollY > 10);
+  topbar.classList.toggle('scrolled', window.scrollY > 10);
 });
 
 const revealElements = document.querySelectorAll('.reveal');

@@ -48,13 +48,22 @@ body.dark-theme {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--hero-gradient);
   color: var(--text);
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .cursor-follower {
@@ -193,7 +202,7 @@ body.dark-theme .topbar.scrolled {
   box-shadow: 0 14px 35px rgba(17, 17, 17, 0.08);
 }
 
-.theme-toggle:hover {
+.theme-toggle:focus-visible {
   transform: translateY(-1px);
   box-shadow: 0 18px 40px rgba(17, 17, 17, 0.12);
 }
@@ -216,14 +225,15 @@ nav a {
   transition: color 0.2s ease, text-decoration-color 0.2s ease, transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
   padding: 8px 10px;
   border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
 }
 
-nav a:hover {
+nav a:focus-visible {
   color: var(--text);
 }
 
 /* Pop + background for nav items (e.g., "About") */
-nav a:hover,
 nav a:focus,
 nav a.pop {
   transform: translateY(-4px) scale(1.02);
@@ -232,7 +242,6 @@ nav a.pop {
   box-shadow: 0 16px 40px rgba(17, 17, 17, 0.06);
 }
 
-body.dark-theme nav a:hover,
 body.dark-theme nav a.pop {
   background: rgba(255, 255, 255, 0.06);
 }
@@ -296,7 +305,6 @@ body.dark-theme nav a.pop {
   mask-image: radial-gradient(ellipse 90% 90% at center, #000 85%, transparent 100%);
 }
 
-.hero-photo:hover,
 .hero-photo:focus-visible {
   transform: translateY(-4px) translateZ(0) scale(1.02);
   box-shadow: 0 24px 58px rgba(17,17,17,0.12);
@@ -403,7 +411,7 @@ body.dark-theme nav a.pop {
   display: block;
 }
 
-.button:hover {
+.button:focus-visible {
   transform: translateY(-1px);
   box-shadow: var(--button-shadow);
 }
@@ -433,10 +441,10 @@ nav a.active {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.project-card:hover,
-.service-card:hover,
-.stats-card:hover,
-.contact-panel:hover {
+.project-card:focus-within,
+.service-card:focus-within,
+.stats-card:focus-within,
+.contact-panel:focus-within {
   transform: translateY(-4px);
   box-shadow: 0 34px 80px rgba(17, 17, 17, 0.08);
 }
@@ -541,6 +549,8 @@ nav a.active {
 }
 
 .project-card a {
+  display: inline-flex;
+  align-items: center;
   color: var(--text);
   text-decoration: none;
   font-weight: 600;
@@ -604,6 +614,379 @@ nav a.active {
     width: 100%;
   }
 
+  .cursor-follower,
+  .cursor-trail {
+    display: none;
+  }
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Small laptops: preserve the desktop layout while preventing cramped columns. */
+@media (max-width: 1024px) {
+  .page-shell {
+    width: 100%;
+    padding-left: clamp(20px, 4vw, 32px);
+    padding-right: clamp(20px, 4vw, 32px);
+  }
+
+  .hero,
+  .section-grid,
+  .contact-panel,
+  .project-card,
+  .service-card,
+  .white-card {
+    min-width: 0;
+  }
+
+  .hero-photo {
+    max-width: 100%;
+  }
+}
+
+/* Tablets and large phones: use compact spacing and a collapsible navigation. */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 1rem;
+  }
+
+  .page-shell {
+    padding-top: 20px;
+    padding-bottom: 36px;
+  }
+
+  .topbar,
+  .topbar.scrolled {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 0 0 16px;
+    position: relative;
+  }
+
+  .brand {
+    font-size: 0.875rem;
+    letter-spacing: 0.12em;
+    min-width: 0;
+  }
+
+  .menu-toggle {
+    width: 44px;
+    height: 44px;
+    padding: 11px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text);
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .theme-toggle {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .topbar nav {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    padding: 0 8px;
+    border: 0 solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.25s ease, border-width 0.25s ease, visibility 0.25s;
+  }
+
+  .topbar nav.is-open {
+    max-height: 16rem;
+    visibility: visible;
+    opacity: 1;
+    padding: 8px;
+    border-width: 1px;
+  }
+
+  .topbar nav a {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .topbar nav a:hover,
+  .topbar nav a:focus,
+  .topbar nav a.pop {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .hero {
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    padding: 24px 0;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .hero-visual {
+    max-width: 100%;
+  }
+
+  .hero-photo {
+    width: min(70vw, 320px);
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .section-grid,
+  .contact-panel,
+  .project-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 0;
+    padding: 24px;
+  }
+
+  .project-card a {
+    min-height: 44px;
+  }
+
+  .contact-panel {
+    align-items: stretch;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .button {
+    min-height: 48px;
+  }
+
+  .eyebrow,
+  .section-label {
+    font-size: 0.875rem;
+  }
+
+  .skills-grid span {
+    min-height: 44px;
+    font-size: 1rem;
+  }
+}
+
+/* Small phones: stack cards and actions into one comfortable column. */
+@media (max-width: 480px) {
+  .page-shell {
+    padding: 16px 16px 28px;
+  }
+
+  .topbar,
+  .topbar.scrolled {
+    gap: 8px;
+    padding-bottom: 12px;
+  }
+
+  .brand {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero {
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .hero h1,
+  .section-grid h2,
+  .service-card h2,
+  .project-card h3,
+  .contact-panel h2 {
+    font-size: clamp(2rem, 9vw, 2.6rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-copy,
+  .section-grid p,
+  .service-card p,
+  .project-card p,
+  .contact-panel p {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-top: 16px;
+  }
+
+  .hero-actions,
+  .contact-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .button,
+  .button-large {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 18px;
+  }
+
+  .section-grid,
+  .section-alt,
+  .contact-panel {
+    margin-top: 28px;
+  }
+
+  .stats-card,
+  .service-card,
+  .white-card,
+  .project-card,
+  .contact-panel {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .project-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .skills-grid {
+    gap: 10px;
+  }
+
+  .footer {
+    margin-top: 32px;
+  }
+}
+
+/* Hover effects are reserved for mouse/trackpad users; touch gets focus feedback. */
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 40px rgba(17, 17, 17, 0.12);
+  }
+
+  nav a:hover {
+    color: var(--text);
+  }
+
+  nav a:hover,
+  nav a.pop {
+    transform: translateY(-4px) scale(1.02);
+    background: rgba(17, 17, 17, 0.06);
+    color: var(--text);
+    box-shadow: 0 16px 40px rgba(17, 17, 17, 0.06);
+  }
+
+  body.dark-theme nav a:hover,
+  body.dark-theme nav a.pop {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-photo:hover {
+    transform: translateY(-4px) translateZ(0) scale(1.02);
+    box-shadow: 0 24px 58px rgba(17, 17, 17, 0.12);
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--button-shadow);
+  }
+
+  .project-card:hover,
+  .service-card:hover,
+  .stats-card:hover,
+  .contact-panel:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 34px 80px rgba(17, 17, 17, 0.08);
+  }
+}
+
+/* Reduced-motion preference: remove nonessential movement and reveal transitions. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cursor-follower,
+  .cursor-trail {
+    display: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* Touch pointers: remove the custom cursor that has no useful touch interaction. */
+@media (hover: none), (pointer: coarse) {
   .cursor-follower,
   .cursor-trail {
     display: none;

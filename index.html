@@ -17,7 +17,19 @@
       <header class="topbar">
         <div class="brand">Sameer Qureshi</div>
 
-        <nav>
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="primaryNavigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav id="primaryNavigation" aria-label="Main navigation">
           <a href="#about">About</a>
           <a href="#work">Work</a>
           <a href="#projects">Projects</a>
@@ -43,7 +55,15 @@
             </div>
           </div>
           <div class="hero-visual">
-            <img class="hero-photo" src="portfolio.png" alt="Sameer Qureshi photo">
+            <img
+              class="hero-photo"
+              src="portfolio.png"
+              alt="Sameer Qureshi photo"
+              width="818"
+              height="941"
+              decoding="async"
+              fetchpriority="high"
+            >
           </div>
           <div class="hero-overlay" aria-hidden="true"></div>
         </section>
