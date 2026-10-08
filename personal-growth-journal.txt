@@ -1,0 +1,22 @@
+Personal Growth Journal
+Overview
+The Personal Growth Journal is a private app for building healthy reflection and fitness habits. It brings journaling, mood tracking, favorites, workout logging, and faith-based reminders together in one secure place.
+
+Problem
+Personal notes, exercise progress, and daily reminders can become scattered across different apps, making it difficult to maintain a consistent personal growth routine.
+
+Solution
+The app combines searchable journal entries, mood and favorites tracking, workout history with progress charts, and Qur’an and Hadith reminders that include references. Users can export their data as JSON backups, while secure accounts keep each user's information in their own MySQL data.
+
+Key Features
+Searchable personal journal
+Mood tracking and favorite entries
+Workout logging with progress charts
+Qur’an and Hadith reminders with references
+JSON data backups
+Secure accounts and user-specific MySQL storage
+Technologies Used
+
+Database: MySQL
+Data portability: JSON backups
+Tools: Git, GitHub
