@@ -2,6 +2,8 @@ const navLinks = document.querySelectorAll('nav a');
 const themeToggle = document.getElementById('themeToggle');
 const menuToggle = document.getElementById('menuToggle');
 const primaryNavigation = document.getElementById('primaryNavigation');
+const visionToggle = document.getElementById('visionToggle');
+const visionSection = document.getElementById('vision');
 const topbar = document.querySelector('.topbar');
 const body = document.body;
 const supportsCustomCursor =
@@ -167,6 +169,17 @@ function setMenuOpen(isOpen) {
   menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   primaryNavigation.classList.toggle('is-open', isOpen);
 }
+
+visionToggle.addEventListener('click', () => {
+  const isExpanded = visionToggle.getAttribute('aria-expanded') === 'true';
+  visionToggle.setAttribute('aria-expanded', String(!isExpanded));
+  visionSection.hidden = isExpanded;
+  setMenuOpen(false);
+
+  if (!isExpanded) {
+    requestAnimationFrame(() => visionSection.scrollIntoView({ behavior: 'auto', block: 'start' }));
+  }
+});
 
 menuToggle.addEventListener('click', () => {
   setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
