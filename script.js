@@ -6,9 +6,29 @@ const visionToggle = document.getElementById('visionToggle');
 const visionSection = document.getElementById('vision');
 const topbar = document.querySelector('.topbar');
 const body = document.body;
+const introScreen = document.getElementById('introScreen');
+const pageShell = document.getElementById('pageShell');
+const scrollProgress = document.getElementById('scrollProgress');
 const supportsCustomCursor =
   window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
   !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let introFallback;
+
+function finishIntro() {
+  if (!introScreen || !pageShell) return;
+  window.clearTimeout(introFallback);
+  introScreen.remove();
+  pageShell.inert = false;
+  body.classList.remove('intro-active');
+}
+
+if (introScreen && pageShell) {
+  introScreen.addEventListener('animationend', (event) => {
+    if (event.animationName === 'intro-screen-exit') finishIntro();
+  });
+  introFallback = window.setTimeout(finishIntro, 3600);
+}
 
 const cursorFollower = document.createElement('div');
 cursorFollower.className = 'cursor-follower';
@@ -160,6 +180,9 @@ navLinks.forEach((link) => {
   link.addEventListener('click', () => {
     navLinks.forEach((item) => item.classList.remove('active'));
     link.classList.add('active');
+    visionToggle.classList.remove('active');
+    visionToggle.setAttribute('aria-expanded', 'false');
+    visionSection.hidden = true;
     setMenuOpen(false);
   });
 });
@@ -172,7 +195,9 @@ function setMenuOpen(isOpen) {
 
 visionToggle.addEventListener('click', () => {
   const isExpanded = visionToggle.getAttribute('aria-expanded') === 'true';
+  navLinks.forEach((link) => link.classList.remove('active'));
   visionToggle.setAttribute('aria-expanded', String(!isExpanded));
+  visionToggle.classList.toggle('active', !isExpanded);
   visionSection.hidden = isExpanded;
   setMenuOpen(false);
 
@@ -207,9 +232,19 @@ window.matchMedia('(min-width: 769px)').addEventListener('change', (event) => {
   }
 });
 
+function updateScrollProgress() {
+  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+  scrollProgress.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+}
+
 window.addEventListener('scroll', () => {
   topbar.classList.toggle('scrolled', window.scrollY > 10);
-});
+  updateScrollProgress();
+}, { passive: true });
+
+window.addEventListener('resize', updateScrollProgress);
+updateScrollProgress();
 
 const revealElements = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver(

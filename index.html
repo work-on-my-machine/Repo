@@ -12,8 +12,21 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div class="page-shell">
+  <body class="intro-active">
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scrollProgress"></span>
+    </div>
+    <div class="intro-screen" id="introScreen" aria-hidden="true">
+      <div class="intro-content">
+        <div class="intro-photo-frame">
+          <img src="portfolio.png" alt="" class="intro-photo" width="818" height="941">
+        </div>
+        <p class="intro-eyebrow">Welcome to</p>
+        <h1>Sameer’s Portfolio</h1>
+        <span class="intro-rule"></span>
+      </div>
+    </div>
+    <div class="page-shell" id="pageShell" inert>
       <header class="topbar">
         <div class="brand">Sameer Qureshi</div>
 
@@ -195,7 +208,7 @@
           </div>
         </section>
 
-        <section class="section-grid section-alt reveal" id="work">
+        <section class="section-alt reveal" id="work">
           <div class="service-card">
             <p class="section-label">Services</p>
             <h2>What I do</h2>
@@ -210,30 +223,72 @@
               <li>Problem Solving</li>
             </ul>
           </div>
-          <div class="service-card white-card">
-            <h3>Skills</h3>
+        </section>
+
+        <section class="section-alt reveal" id="skills">
+          <div class="service-card white-card skills-card">
+            <h2>Skills</h2>
             <div class="skills-grid">
-              <span>C++</span>
-              <!-- <span>Java</span> -->
-              <span>Python</span>
-               <span>DSA</span>
-              <span>AI</span>
-              <!-- <span>JavaScript</span>
-              <span>TypeScript</span> -->
-              <span>React</span>
-              <!-- <span>Node.js</span>
-              <span>Express.js</span>
-              <span>HTML5</span>
-              <span>CSS3</span>
-              <span>Tailwind CSS</span> -->
-              <span>MySQL</span>
-              <!-- <span>PostgreSQL</span> -->
-              <!-- <span>Git</span>
-              <span>GitHub</span> -->
-              <span>Postman</span>
-              <span>AWS</span>
-              <!-- <span>REST API</span> -->
-              <!-- <span>OpenCV</span> -->
+              <article class="skill-card">
+                <h4>C++</h4>
+                <ul>
+                  <li><strong>Programming fundamentals:</strong> Types, conditions, loops and functions.</li>
+                  <li><strong>Object-oriented programming:</strong> Classes, objects and encapsulation.</li>
+                  <li><strong>Standard Template Library:</strong> Common containers and algorithms.</li>
+                </ul>
+              </article>
+              <article class="skill-card">
+                <h4>Python</h4>
+                <ul>
+                  <li><strong>Core syntax:</strong> Variables, collections and control flow.</li>
+                  <li><strong>Functions and modules:</strong> Organize reusable code into clear units.</li>
+                </ul>
+              </article>
+              <article class="skill-card">
+                <h4>Data Structures &amp; Algorithms</h4>
+                <ul>
+                  <li><strong>Data structures:</strong> Arrays, strings, stacks, queues and linked lists.</li>
+                  <li><strong>Algorithms:</strong> Searching, sorting and problem-solving approaches.</li>
+                  <li><strong>Complexity:</strong> Compare time and space requirements.</li>
+                </ul>
+              </article>
+              <article class="skill-card">
+                <h4>Artificial Intelligence</h4>
+                <ul>
+                  <li><strong>AI fundamentals:</strong> How intelligent systems use data and rules to solve tasks.</li>
+                  <li><strong>Machine learning basics:</strong> Learn patterns from examples to make predictions.</li>
+                </ul>
+              </article>
+              <article class="skill-card">
+                <h4>React</h4>
+                <ul>
+                  <li><strong>Components and JSX:</strong> Build interfaces from reusable UI pieces.</li>
+                  <li><strong>Props and state:</strong> Pass data and update the interface as it changes.</li>
+                  <li><strong>Hooks:</strong> Add state and other React features to components.</li>
+                </ul>
+              </article>
+              <article class="skill-card">
+                <h4>MySQL</h4>
+                <ul>
+                  <li><strong>Relational databases:</strong> Organize information in connected tables.</li>
+                  <li><strong>SQL queries:</strong> Create, read, update and delete records.</li>
+                  <li><strong>Joins:</strong> Retrieve related information across tables.</li>
+                </ul>
+              </article>
+              <article class="skill-card">
+                <h4>Postman</h4>
+                <ul>
+                  <li><strong>API requests:</strong> Send HTTP requests and inspect responses.</li>
+                  <li><strong>Collections:</strong> Group and rerun related API requests.</li>
+                </ul>
+              </article>
+              <article class="skill-card">
+                <h4>AWS</h4>
+                <ul>
+                  <li><strong>Cloud fundamentals:</strong> Understand compute, storage and networking services.</li>
+                  <li><strong>Cloud deployment:</strong> Learn the basics of running applications in the cloud.</li>
+                </ul>
+              </article>
             </div>
           </div>
         </section>
